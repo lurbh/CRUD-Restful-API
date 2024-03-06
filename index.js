@@ -42,6 +42,40 @@ async function main()
         appointments.push(newappt);
     }
 }
+
+function checkDateFormat(date)
+{
+    const sd = date.split('-');
+    // console.log(sd.length);
+    // console.log(sd[0].length);
+    // console.log(sd[0]);
+    // console.log(sd[1].length);
+    // console.log(sd[1]);
+    // console.log(sd[2].length );
+    // console.log(sd[2]);
+    if(sd.length == 3)
+        if(sd[0].length == 4)
+            if(sd[0] >= 2021 && sd[0] <= 2030)
+                if(sd[1].length == 2)
+                    if(sd[1] >= 1 && sd[1] <= 12)
+                        if(sd[2].length == 2)
+                            if(sd[2] >= 1 && sd[2] <= 31)
+                                return true;
+
+    return false;
+}
+
+function checkTimeFormat(time)
+{
+    const st = time.split(':');
+    if(st.length == 2)
+        if(st[0].length == 2)
+            if(st[0] >= 0 && st[0] <= 24)
+                if(st[1].length == 2)
+                    if(st[1] >= 0 && st[1] <= 59)
+                        return true;
+    return false;
+}
   
 main();
 
@@ -81,6 +115,23 @@ app.post("/appointments", function(req,res){
         res.status(400);
         res.json({
             "error":"Invalid Appointment Type"
+        });
+        return;
+    }
+    if(!checkDateFormat(date))
+    {
+        console.log("??")
+        res.status(400);
+        res.json({
+            "error":"Invalid Date Given"
+        });
+        return;
+    }
+    if(!checkTimeFormat(time))
+    {
+        res.status(400);
+        res.json({
+            "error":"Invalid Time Given"
         });
         return;
     }
