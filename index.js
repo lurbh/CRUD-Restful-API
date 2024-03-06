@@ -13,8 +13,8 @@ app.use(cors());
 // enable recieving and sending of JSON
 app.use(express.json());
 
-const BASE_JSON_BIN_URL = process.env.BASE_JSON_BIN_URL;
-const BIN_ID = process.env.BIN_ID;
+// const BASE_JSON_BIN_URL = process.env.BASE_JSON_BIN_URL;
+// const BIN_ID = process.env.BIN_ID;
 const appointments = [];
 
 const APPT_TYPE = [
@@ -28,7 +28,7 @@ const APPT_TYPE = [
 
 async function main() 
 {
-    let response = await axios.get(BASE_JSON_BIN_URL + "/" + BIN_ID + "/latest");
+    let response = await axios.get(process.env.BASE_JSON_BIN_URL + "/" + process.env.BIN_ID + "/latest");
     for(let a of response.data.record.Appointment)
     {
         const newappt = {
