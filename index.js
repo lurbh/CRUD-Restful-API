@@ -89,6 +89,13 @@ async function main()
         try 
         {
             const appointments = await db.collection("appointments").find({}).toArray();
+            for(let a of appointments)
+            {
+                const type = await db.collection("appointment_type").findOne({
+                    '_id' : a.appttype
+                });
+                a.appttype = type.type;
+            }
             res.status(200);
             res.json({
                 "appointments": appointments
@@ -241,6 +248,13 @@ async function main()
                     '$options': 'i'
                 }
             }).toArray();
+            for(let a of appointments)
+            {
+                const type = await db.collection("appointment_type").findOne({
+                    '_id' : a.appttype
+                });
+                a.appttype = type.type;
+            }
             res.status(200);
             res.json({
                 "appointments": appointments
@@ -264,6 +278,13 @@ async function main()
                     '$options': 'i'
                 }
             }).toArray();
+            for(let a of appointments)
+            {
+                const type = await db.collection("appointment_type").findOne({
+                    '_id' : a.appttype
+                });
+                a.appttype = type.type;
+            }
             res.status(200);
             res.json({
                 "appointments": appointments
@@ -288,6 +309,13 @@ async function main()
             const appointments = await db.collection("appointments").find({
                 'appttype' : o_id
             }).toArray();
+            for(let a of appointments)
+            {
+                const type = await db.collection("appointment_type").findOne({
+                    '_id' : a.appttype
+                });
+                a.appttype = type.type;
+            }
             res.status(200);
             res.json({
                 "appointments": appointments
